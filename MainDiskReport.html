@@ -1,0 +1,77 @@
+﻿ <html>
+      <head>
+        <title>Disk Utilization Reports</title>
+        <style>
+          body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+          }
+          h1 {
+            color: #2c3e50;
+            text-align: center;
+          }
+          .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+          }
+          .report-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px 30px;
+            text-align: center;
+            width: 250px;
+            transition: transform 0.2s, box-shadow 0.2s;
+          }
+          .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+          }
+          .report-card a {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+          }
+          .icon {
+            font-size: 40px;
+            color: #3498db;
+          }
+          
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      </head>
+      <body>
+        <h1>Disk Utilization Reports</h1>
+        <div class="container">
+  <div class="report-card">
+    <div class="icon"><i class="fas fa-server"></i></div>
+    <a href='DiskReportQA.html' target='_blank'>QA Report</a>
+  </div>
+  <div class="report-card">
+    <div class="icon"><i class="fas fa-database"></i></div>
+    <a href='DiskReportBLD.html' target='_blank'>BLD Report</a>
+  </div>
+  <div class="report-card">
+    <div class="icon"><i class="fas fa-code-branch"></i></div>
+    <a href='DiskReportodev.html' target='_blank'>ODEV Report</a>
+  </div>
+  <div class="report-card">
+    <div class="icon"><i class="fas fa-laptop-code"></i></div>
+    <a href='DiskReportDEV.html' target='_blank'>DEV Report</a>
+  </div>
+  <div class="report-card">
+    <div class="icon"><i class="fas fa-cogs"></i></div>
+    <a href='DiskReportPREF.html' target='_blank'>PREF Report</a>
+  </div>
+</div>
+ 
+      </body>
+      </html>

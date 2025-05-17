@@ -1,0 +1,72 @@
+﻿<html>
+<head>
+<title>Disk Utilization Report</title>
+<style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    th { background-color: f2f2f2; }
+    .critical { background-color: red; color: white; }
+    .warning { background-color: yellow; color: black; }
+    .search-container { margin-bottom: 10px; }
+    .marquee-container { 
+       width: 100%; 
+       overflow: hidden; 
+        white-space: nowrap; 
+        background-color: 228B22;
+        color: fff; 
+        padding: 10px;
+         font-size: 16px;
+         font-weight: bold;
+            }
+    .marquee-text { 
+     display: inline-block; 
+      animation: marquee 10s linear infinite; 
+    }
+     @keyframes marquee {
+        from { transform: translateX(100%); }
+       to { transform: translateX(-100%); }
+         }
+
+          .marquee-container:hover .marquee-text {
+         animation-play-state: paused;
+       }
+
+</style>
+            <script>
+  function filterTable() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("diskTable");
+  tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) { 
+      td = tr[i].getElementsByTagName("td")[0]; // Only filtering Machine Name column
+      if (td) {
+          txtValue = td.textContent || td.innerText;
+          tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+      }       
+     }
+    }
+</script>
+</head>
+<body>
+   <div class="marquee-container">
+     <span class="marquee-text">This report consists of disk utilization above 70% and was generated on 2025-04-27 08:27:18</span>
+      </div>
+      <h2 style='text-align: center; color: green;font-weight: bold;font-size: 24pt !important'>Disk Utilization Report</h2>
+
+    <div class="search-container">
+   <label for="searchInput">Search Server:</label>
+    <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Type to filter servers...">
+    </div>
+<table id="diskTable">
+<tr>
+<th>Machine Name</th>
+<th>Drive</th>
+<th>Used Space (GB)</th>
+<th>Free Space (GB)</th>
+<th>Utilization (%)</th>
+</tr><tr class='warning'><td>QN-AZODV-108</td><td>F:</td><td>203.83</td><td>52.17</td><td>79.62%</td></tr></table>
+</body>
+</html>

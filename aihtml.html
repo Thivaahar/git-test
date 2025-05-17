@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI CSV Assistant</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    input, textarea, button { margin-top: 10px; width: 100%; }
+    #response { margin-top: 20px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>AI CSV Assistant</h1>
+  
+  <input type="file" id="csvFile" accept=".csv" />
+  <textarea id="question" placeholder="Ask a question about your CSV..."></textarea>
+  <button onclick="askQuestion()">Ask</button>
+
+  <div id="response"></div>
+
+  <script>
+    let csvData = "";
+
+    document.getElementById('csvFile').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      Papa.parse(file, {
+        header: true,
+        complete: function(results) {
+          csvData = JSON.stringify(results.data.slice(0, 100)); // first 100 rows
+          alert("CSV loaded!");
+        }
+      });
+    });
+
+    async function askQuestion() {
+      const question = document.getElementById('question').value;
+      const responseDiv = document.getElementById('response');
+
+      if (!csvData) {
+        responseDiv.innerText = "Please upload a CSV file first.";
+        return;
+      }
+
+      const prompt = `You are a helpful assistant. Use this CSV data:\n${csvData}\n\nAnswer this question: ${question}`;
+
+      const result = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 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' // replace this
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: prompt }],
+          max_tokens: 500
+        })
+      });
+
+      const json = await result.json();
+      responseDiv.innerText = json.choices[0].message.content;
+    }
+  </script>
+</body>
+</html>
